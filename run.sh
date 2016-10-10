@@ -20,4 +20,4 @@ if [ ! -d "$DIR/$VERSIONED_ENV" ]; then
 fi;
 
 PYTHON=$DIR/$VERSIONED_ENV/bin/python
-$PYTHON -c "print 'hello world'"
+$PYTHON src/py/main.py
