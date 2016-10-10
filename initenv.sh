@@ -21,11 +21,19 @@ URL_BASE=https://pypi.python.org/packages/source/v/virtualenv
 
 # virtualenv directory to live in
 if [ -z "$1" ]; then
-	echo "USAGE: initenv.sh [ENV]"
+	echo "USAGE: initenv.sh [ENV] [VERSION]"
 	echo "Must provide name of directory (to be created) where client environment will live"
 	exit
 fi
 INITIAL_ENV=$1
+
+# transifex client version to use
+if [ -z "$2" ]; then
+	echo "USAGE: initenv.sh [ENV] [VERSION]"
+	echo "Must provide the version of the jira client to use"
+	exit
+fi
+JIRA_CLIENT_VERSION=$2
 
 # If directory already exists, assume its already set up
 if [ -d "$INITIAL_ENV" ]; then
@@ -58,9 +66,9 @@ rm -rf virtualenv-$VIRTUALENV_VERSION
 rm -rf virtualenv-$VIRTUALENV_VERSION.tar.gz
 
 # install transifex client into environment
-# echo
-# echo "***Instailling transifex client in $INITIAL_ENV***"
-# $INITIAL_ENV/bin/pip install transifex-client==${TX_VERSION}
+echo
+echo "***Instailling jira client in $INITIAL_ENV***"
+$INITIAL_ENV/bin/pip install jira==${JIRA_CLIENT_VERSION}
 
 echo
 echo ***Done setting up jira client***
