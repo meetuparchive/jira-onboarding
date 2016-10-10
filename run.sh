@@ -15,7 +15,7 @@ if [ ! -d "$DIR" ]; then
 fi;
 if [ ! -d "$DIR/$VERSIONED_ENV" ]; then
 	pushd $DIR > /dev/null
-	../initenv.sh $VERSIONED_ENV $JIRA_CLIENT_VERSION
+	../src/bash/initenv.sh $VERSIONED_ENV $JIRA_CLIENT_VERSION
 	popd > /dev/null
 fi;
 
