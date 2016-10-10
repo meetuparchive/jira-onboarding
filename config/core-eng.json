@@ -1,0 +1,15 @@
+{
+  "name": "Core Engineering",
+  "issues_to_create": [
+    {
+      "summary": "Deeper Dive Training",
+      "description": "Get Deeper Dive Training",
+      "assignee": { "name" : "jake" }
+    },
+    {
+      "summary": "International Training",
+      "description": "Get International Training",
+      "assignee": { "name" : "jake" }
+    }
+  ]
+}
