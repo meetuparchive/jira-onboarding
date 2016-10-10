@@ -9,9 +9,8 @@ class LoadedConfig:
     self.issues = [ConfigIssue(data) for data in input_dict['issues_to_create']]
     self.project_key = input_dict['project_key']
     self.raw_data = input_dict
-
-  def get_interp_field(self, field, name=""):
-    return self.raw_data[field].replace("{{name}}", name)
+  def get_epic_fields(self, name=""):
+    return get_interp_data_helper(self.raw_data["epic_fields"], name=name)
 
 class ConfigIssue:
   def __init__(self, issue_dict):
@@ -41,11 +40,13 @@ def validate_config(config_json):
     assert "project_key" in config_json # config must have a project key specified
     assert config_json["project_key"] # project key must be non-empty
 
-    assert "epic_summary" in config_json # config must have an epic summary specified
-    assert config_json["epic_summary"] # epic summary must be non-empty
+    assert "epic_fields" in config_json # config must have epic field block specified
+    epic_json = config_json["epic_fields"]
+    assert "summary" in epic_json # config must have an epic summary specified
+    assert epic_json["summary"] # epic summary must be non-empty
 
-    assert "epic_description" in config_json # config must have an epic description specified
-    assert config_json["epic_description"] # epic_description must be non-empty
+    assert "description" in epic_json # config must have an epic description specified
+    assert epic_json["description"] # epic_description must be non-empty
 
     assert "issues_to_create" in config_json # config must have a list of issues specified
     assert len(config_json["issues_to_create"]) > 0 # list of issues must be non-empty
@@ -86,13 +87,10 @@ def get_authed_jira(server, username, password):
 def run_with_client(jira_client, config, eng_name):
   project = jira_client.project(config.project_key)
   
-  # TODO custom fields come from custom impl?
-  new_epic = jira_client.create_issue(\
-    project=project.key,\
-    summary=config.get_interp_field("epic_summary", name=eng_name),\
-    description=config.get_interp_field("epic_description", name=eng_name),\
-    customfield_10004=config.get_interp_field("epic_summary", name=eng_name),\
-    issuetype={'name': 'Epic'})
+  data = config.get_epic_fields(name=eng_name)
+  data["project"] = project.key
+  data["issuetype"] = {"name": "Epic"}
+  new_epic = jira_client.create_issue(fields=data)
 
   for issue in config.issues:
     data = issue.get_interp_data(name=eng_name, epic_key=new_epic.key)
