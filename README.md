@@ -26,6 +26,3 @@ To run, just clone this repo and run `run.sh [path to config file]`, and follow 
 		}
 	  ]
 	}
-
-# TODO
-1. Move the configs to a separate repo
