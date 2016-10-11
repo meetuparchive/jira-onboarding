@@ -9,6 +9,16 @@ To run, just clone this repo and run
 and then follow the prompts. You will be prompted to login with your Jira username and password.
 
 # config files:
+## validation
+You can run validation on your config file (to make sure that necessary fields are present) by running
+
+`run.sh --validate [path to config file]`
+
+This will report an error if any required fields (such as server, name, project key, etc...) are not present.
+
+This validation is also ran before running the script as normal, so this is more of a dry-run test.
+
+Note that this will not catch ALL issues with your config, namely the presense of required custom fields that could be configured in the Jira instance you are using.  Validation currently does not check anything related to the Jira server beyond the existance of the server itself.
 ## example
 ### (core-eng.json)
 	{
