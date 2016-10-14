@@ -21,13 +21,21 @@ class ConfigIssue:
 
 
 def get_interp_data_helper(data, name="", epic_key=""):
+  if isinstance(data, str) or isinstance(data, unicode):
+    return interp_string(data, name, epic_key)
   new_dict = dict()
   for (k,v) in data.iteritems():
     if isinstance(v, dict):
       new_dict[k] = get_interp_data_helper(v, name, epic_key)
+    elif isinstance(v, list):
+      new_dict[k] = [get_interp_data_helper(i, name, epic_key) for i in v]
     else:
-      new_dict[k] = v.replace("{{name}}", name).replace("{{epic_key}}", epic_key)
+      new_dict[k] = interp_string(v, name, epic_key)
   return new_dict
+
+def interp_string(in_str, name, epic_key):
+  return in_str.replace("{{name}}", name).replace("{{epic_key}}", epic_key)
+
 
 def validate_config(config_json):
   try:
