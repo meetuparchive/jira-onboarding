@@ -1,17 +1,18 @@
 #!/bin/bash
 
 ###
-# This is a script for fetching and installing the transifex client
+# This is a script for fetching and installing the jira client
 # within a virtualenv, and should be environment-dependancy free.
 # We download the virtualenv distribution, create an environment
 # and install the jira client within that environment
-#
-# The transifex client command can then be called from other tools.
 ###
 
 ### SETUP ###
 # virtualenv version
 VIRTUALENV_VERSION=15.0.1
+
+# other libs versions
+PYYAML_VERSION=3.12
 
 # use current python
 PYTHON=$(which python)
@@ -67,8 +68,11 @@ rm -rf virtualenv-$VIRTUALENV_VERSION.tar.gz
 
 # install transifex client into environment
 echo
-echo "***Instailling jira client in $INITIAL_ENV***"
+echo "***Installing jira client in $INITIAL_ENV***"
 $INITIAL_ENV/bin/pip install jira==${JIRA_CLIENT_VERSION}
+
+echo "***Installing pyyaml in $INITIAL_ENV***"
+$INITIAL_ENV/bin/pip install PyYAML==${PYYAML_VERSION}
 
 echo
 echo ***Done setting up jira client***
