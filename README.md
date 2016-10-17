@@ -42,7 +42,11 @@ There are two variables you can include in your conf file, to hold things that y
 		{
 		  "summary": "Core Team Training",
 		  "description": "Go through Core team training class",
-		  "assignee": { "name" : "jake" }
+		  "assignee": { "name" : "jake" },
+		  "checklist_content.gebsun_checklist": [
+            "Make sure dev box is setup for interactive session",
+			"Follow up with questions for trainer"
+		  ]
 		}
 	  ]
 	}
