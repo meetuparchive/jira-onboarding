@@ -1,6 +1,6 @@
 from __future__ import with_statement
 from jira import JIRA
-import argparse, getpass, json, os, sys, traceback
+import argparse, getpass, json, os, sys, traceback, yaml
 
 class LoadedConfig:
   def __init__(self, input_dict):
@@ -25,7 +25,11 @@ def get_interp_data_helper(data, name="", epic_key=""):
     return interp_string(data, name, epic_key)
   new_dict = dict()
   for (k,v) in data.iteritems():
-    if isinstance(v, dict):
+    # if key ends with gebsun_checklist, convert to gebsun checklist format (https://marketplace.atlassian.com/plugins/com.gebsun.plugins.jira.issuechecklist/cloud/overview)
+    if k.endswith(".gebsun_checklist") and isinstance(v, list):
+      checklist_dict = { "items": [ { "text": item.replace("{{name}}", name).replace("{{epic_key}}", epic_key) } for item in v ] }
+      new_dict[k[:-len(".gebsun_checklist")]] = yaml.safe_dump(checklist_dict, default_flow_style=False)
+    elif isinstance(v, dict):
       new_dict[k] = get_interp_data_helper(v, name, epic_key)
     elif isinstance(v, list):
       new_dict[k] = [get_interp_data_helper(i, name, epic_key) for i in v]

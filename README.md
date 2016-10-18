@@ -24,6 +24,20 @@ There are two variables you can include in your conf file, to hold things that y
 - {{name}}: represents the name of the person you are onboarding - you will be prompted to specify this as part of running this script
 - {{epic_key}}: represents the key of the epic that will be created as a result of running this script. you can use this if you need to link created issues back to this epic.
 
+## custom field support
+To support custom fields and JIRA add-ons, you may provide an extension to a custom field (ie. `customfield_12345`) for the following add-ons:
+
+### [Issue Checklist](https://marketplace.atlassian.com/plugins/com.gebsun.plugins.jira.issuechecklist/cloud/overview)
+Append `.gebsun_checklist` to the custom field ID key, such as `customfield_12345.gebsun_checklist`, and provide a JSON list of strings as its value to create the checklist. For example:
+
+	"customfield_12345.gebsun_checklist": [
+        "Item #1",
+        "Item #2",
+        "Item #3"
+    ]
+
+Also, make sure that "Checklist Content" is an field in Issue Edit.
+
 ## example
 ### (core-eng.json)
 	{
@@ -42,7 +56,11 @@ There are two variables you can include in your conf file, to hold things that y
 		{
 		  "summary": "Core Team Training",
 		  "description": "Go through Core team training class",
-		  "assignee": { "name" : "jake" }
+		  "assignee": { "name" : "jake" },
+		  "customfield_12345.gebsun_checklist": [
+			"Make sure dev box is setup for interactive session",
+			"Follow up with questions for trainer"
+		  ]
 		}
 	  ]
 	}
