@@ -8,7 +8,7 @@ class JiraOnboardingWebImpl(object):
   @app.route('/')
   def land(self, request):
       request.setHeader('Content-Type', 'application/json')
-      return json.dumps({"key": "Hello World"})
+      return json.dumps({"key": "Hello Worlds"})
 
 if __name__ == "__main__":
   web = JiraOnboardingWebImpl()
