@@ -20,13 +20,14 @@ if [ ! -d "$DIR/$VERSIONED_ENV" ]; then
 fi;
 
 PYTHON=$DIR/$VERSIONED_ENV/bin/python
-if [ "$1" == "exec" ]; then
-  $PYTHON src/py/main.py $@
-
-elif [ "$1" == "webserver" ]; then
-  $PYTHON src/py/server.py
+mode="$1"
+shift
+if [ "$mode" == "exec" ]; then
+	$PYTHON src/py/main.py $@
+elif [ "$mode" == "webserver" ]; then
+	$PYTHON src/py/server.py
 else
-  echo "Please specify mode to run (exec|webserver)"
+	echo "Please specify mode to run (exec|webserver)"
 fi
 
 
