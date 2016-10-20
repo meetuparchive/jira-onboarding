@@ -1,0 +1,8 @@
+<html xmlns:t="http://twistedmatrix.com/ns/twisted.web.template/0.1">
+<span t:render="str_field">
+	<t:slot name="fieldName"/>: 
+	<input type="text" name="fieldVal" size="40">
+		<t:attr name="value"><t:slot name="valueStr"/></t:attr>
+	</input>
+</span>
+</html>

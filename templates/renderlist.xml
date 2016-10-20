@@ -1,0 +1,5 @@
+<html xmlns:t="http://twistedmatrix.com/ns/twisted.web.template/0.1">
+<ul>
+	<div t:render="items"></div>
+</ul>
+</html>

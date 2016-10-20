@@ -1,0 +1,14 @@
+<html xmlns:t="http://twistedmatrix.com/ns/twisted.web.template/0.1">
+<body>
+	<div t:render="header" />
+	<div id="content">
+	<p>
+		Load a template:
+	</p>
+	<form action="/upload" method="post" enctype="multipart/form-data">
+		<input type="file" name="datafile" size="40" />
+		<input type="submit" value="Upload"/>
+	</form>
+	</div>
+</body>
+</html>

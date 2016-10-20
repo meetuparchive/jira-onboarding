@@ -1,0 +1,10 @@
+<html xmlns:t="http://twistedmatrix.com/ns/twisted.web.template/0.1">
+<body>
+	<div t:render="header" />
+	<div id="content">
+		<ul>
+		<span t:render="config" />
+		</ul>
+	</div>
+</body>
+</html>

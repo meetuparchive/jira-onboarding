@@ -12,6 +12,16 @@ def load_config(path_to_config):
       loaded = LoadedConfig(config_json)
   return loaded
 
+def load_config_from_string(str_value):
+  try:
+    config_json = json.loads(str_value)
+    if validate_config(config_json):
+      return LoadedConfig(config_json)
+    else:
+      return None
+  except:
+    return None
+
 class LoadedConfig:
   def __init__(self, input_dict):
     self.server = input_dict['server']
