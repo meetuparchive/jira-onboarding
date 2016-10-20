@@ -13,6 +13,7 @@ VIRTUALENV_VERSION=15.0.1
 
 # other libs versions
 PYYAML_VERSION=3.12
+KLEIN_VERSION=15.3.1
 
 # use current python
 PYTHON=$(which python)
@@ -73,6 +74,9 @@ $INITIAL_ENV/bin/pip install jira==${JIRA_CLIENT_VERSION}
 
 echo "***Installing pyyaml in $INITIAL_ENV***"
 $INITIAL_ENV/bin/pip install PyYAML==${PYYAML_VERSION}
+
+echo "***Installing klein in $INITIAL_ENV***"
+$INITIAL_ENV/bin/pip install klein==${KLEIN_VERSION}
 
 echo
 echo ***Done setting up jira client***

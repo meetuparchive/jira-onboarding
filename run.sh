@@ -3,7 +3,7 @@
 DIR="env"
 ENV_BASE="jira-env"
 
-VERSION=00.00.02
+VERSION=00.00.03
 
 JIRA_CLIENT_VERSION=1.0.7
 
@@ -20,4 +20,14 @@ if [ ! -d "$DIR/$VERSIONED_ENV" ]; then
 fi;
 
 PYTHON=$DIR/$VERSIONED_ENV/bin/python
-$PYTHON src/py/main.py $@
+if [ "$1" == "exec" ]; then
+  $PYTHON src/py/main.py $@
+
+elif [ "$1" == "webserver" ]; then
+  $PYTHON src/py/server.py
+else
+  echo "Please specify mode to run (exec|webserver)"
+fi
+
+
+
