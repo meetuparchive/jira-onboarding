@@ -1,4 +1,4 @@
-from jira import JIRA
+from jira_instance.jira_instance import check_jira_server
 import sys, traceback
 
 ## Run validation checks on a given configuration json object
@@ -39,10 +39,3 @@ def validate_config(config_json):
     filename, line, func, text = tb_info[-1]
     return False
   return True
-
-def check_jira_server(server):
-  try:
-    return JIRA(server)
-  except:
-    return None
-

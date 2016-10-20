@@ -1,10 +1,7 @@
 from __future__ import with_statement
-from jira import JIRA
 import argparse, getpass
 from config.configs import load_config
-
-def get_authed_jira(server, username, password):
-  return JIRA(server, basic_auth=(username, password))
+from jira_instance.jira_instance import get_authed_jira
 
 def run_with_client(jira_client, config, eng_name):
   project = jira_client.project(config.project_key)
