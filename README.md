@@ -4,7 +4,7 @@ Automated creation of a Jira board to track the onboarding process for new hires
 # running
 To run, just clone this repo and run
 
-`run.sh [path to config file]`
+`run.sh --path_to_config [path to config file]`
 
 and then follow the prompts. You will be prompted to login with your Jira username and password.
 
@@ -12,7 +12,7 @@ and then follow the prompts. You will be prompted to login with your Jira userna
 ## validation
 You can run validation on your config file (to make sure that necessary fields are present) by running
 
-`run.sh --validate [path to config file]`
+`run.sh --validate --path_to_config [path to config file]`
 
 This will report an error if any required fields (such as server, name, project key, etc...) are not present.
 
