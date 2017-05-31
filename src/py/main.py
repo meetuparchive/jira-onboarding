@@ -52,6 +52,8 @@ def main():
     exit(-1)
 
   eng_name = raw_input("What is the name of the person we are onboarding? ")
+  start_date = raw_input("What date does the person start? (e.g. 2017-01-24) ")
+  eng_name += " (Start " + start_date + ") "
   run_with_client(jira_client, loaded_config, eng_name)
 
 if __name__ == "__main__":
