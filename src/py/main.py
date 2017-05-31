@@ -3,10 +3,10 @@ import argparse, getpass
 from config.configs import load_config
 from jira_instance.jira_instance import get_authed_jira
 
-def run_with_client(jira_client, config, eng_name):
+def run_with_client(jira_client, config, eng_name, start_date):
   project = jira_client.project(config.project_key)
-  
-  data = config.get_epic_fields(name=eng_name)
+
+  data = config.get_epic_fields(name=eng_name, date=start_date)
   data["project"] = project.key
   data["issuetype"] = {"name": "Epic"}
   new_epic = jira_client.create_issue(fields=data)
@@ -26,7 +26,7 @@ def main():
   parser.add_argument("--path_to_config", required=True, help="Path to configuration file to use")
   parser.add_argument("--validate", action="store_true", help="Only perform validation on config, don't execute")
   args = parser.parse_args()
-  
+
   # load config, and validate
   loaded_config = load_config(args.path_to_config)
   if not loaded_config:
@@ -53,8 +53,7 @@ def main():
 
   eng_name = raw_input("What is the name of the person we are onboarding? ")
   start_date = raw_input("What date does the person start? (e.g. 2017-01-24) ")
-  eng_name += " (Start " + start_date + ") "
-  run_with_client(jira_client, loaded_config, eng_name)
+  run_with_client(jira_client, loaded_config, eng_name, start_date)
 
 if __name__ == "__main__":
   main()
