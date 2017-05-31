@@ -19,20 +19,20 @@ class LoadedConfig:
     self.issues = [ConfigIssue(data) for data in input_dict['issues_to_create']]
     self.project_key = input_dict['project_key']
     self.raw_data = input_dict
-  def get_epic_fields(self, name=""):
-    return get_interp_data_helper(self.raw_data["epic_fields"], name=name)
+  def get_epic_fields(self, name="", date=""):
+    return get_interp_data_helper(self.raw_data["epic_fields"], name=name, date=date)
 
 class ConfigIssue:
   def __init__(self, issue_dict):
     self.data = issue_dict
 
-  def get_interp_data(self, name="", epic_key=""):
-    return get_interp_data_helper(self.data, name, epic_key)
+  def get_interp_data(self, name="", epic_key="", date=""):
+    return get_interp_data_helper(self.data, name, epic_key, date)
 
 
-def get_interp_data_helper(data, name="", epic_key=""):
+def get_interp_data_helper(data, name="", epic_key="", date=""):
   if isinstance(data, str) or isinstance(data, unicode):
-    return interp_string(data, name, epic_key)
+    return interp_string(data, name, epic_key, date)
   new_dict = dict()
   for (k,v) in data.iteritems():
     # if key ends with gebsun_checklist, convert to gebsun checklist format (https://marketplace.atlassian.com/plugins/com.gebsun.plugins.jira.issuechecklist/cloud/overview)
@@ -44,9 +44,8 @@ def get_interp_data_helper(data, name="", epic_key=""):
     elif isinstance(v, list):
       new_dict[k] = [get_interp_data_helper(i, name, epic_key) for i in v]
     else:
-      new_dict[k] = interp_string(v, name, epic_key)
+      new_dict[k] = interp_string(v, name, epic_key, date)
   return new_dict
 
-def interp_string(in_str, name, epic_key):
-  return in_str.replace("{{name}}", name).replace("{{epic_key}}", epic_key)
-
+def interp_string(in_str, name, epic_key, date):
+  return in_str.replace("{{name}}", name).replace("{{epic_key}}", epic_key).replace("{{date}}", date)

@@ -21,8 +21,10 @@ This validation is also ran before running the script as normal, so this is more
 Note that this will not catch ALL issues with your config, namely the presense of required custom fields that could be configured in the Jira instance you are using.  Validation currently does not check anything related to the Jira server beyond the existance of the server itself.
 ## variables
 There are two variables you can include in your conf file, to hold things that you won't know ahead of time when writing the config. they are:
-- {{name}}: represents the name of the person you are onboarding - you will be prompted to specify this as part of running this script
-- {{epic_key}}: represents the key of the epic that will be created as a result of running this script. you can use this if you need to link created issues back to this epic.
+- `{{name}}`: represents the name of the person you are onboarding - you will be prompted to specify this as part of running this script
+- `{{date}}`: represents the start date of the person being onboarded - you will be prompted to specify this as part of running this script
+- `{{epic_key}}`: represents the key of the epic that will be created as a result of running this script. you can use this if you need to link created issues back to this epic.
+
 
 ## custom field support
 To support custom fields and JIRA add-ons, you may provide an extension to a custom field (ie. `customfield_12345`) for the following add-ons:
@@ -45,7 +47,7 @@ Also, make sure that "Checklist Content" is an field in Issue Edit.
 	  "name": "Core Engineering",
 	  "project_key": "PK",
 	  "epic_fields": {
-		"summary": "Onboarding {{name}}",
+		"summary": "Onboarding {{name}} starts {{date}}",
 		"description": "Tasks to complete in the onboarding process for {{name}}",
 	  },
 	  "issues_to_create": [
