@@ -8,6 +8,14 @@ To run, just clone this repo and run
 
 and then follow the prompts. You will be prompted to login with your Jira username and password.
 
+## logging in
+If you are having issues logging into Jira with a username and password (maybe you don't have a password because of SSO), follow the following steps:
+- Go to https://meetup.atlassian.net/
+- Click `Can't log in?` underneath the login box
+- Type in your associated meetup email account and click `Send recovery link`
+- Check your email for the recovery link. In this email look for `Alternatively, you can reset your password for your Atlassian account.` and click the link to reset your password. Don't click `Log in to my account`!! This will just log you in and not give you the chance to set a password
+- Type in your new password and submit. Use this to log in!
+
 # config files:
 ## validation
 You can run validation on your config file (to make sure that necessary fields are present) by running
