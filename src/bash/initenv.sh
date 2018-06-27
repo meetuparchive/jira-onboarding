@@ -50,7 +50,7 @@ echo
 # get virtualenv dist, and extract
 echo
 echo "***Downloading virtualenv***"
-curl -O $URL_BASE/virtualenv-$VIRTUALENV_VERSION.tar.gz
+curl -L -O $URL_BASE/virtualenv-$VIRTUALENV_VERSION.tar.gz
 echo
 echo "***Extracting virtualenv***"
 tar xzf virtualenv-$VIRTUALENV_VERSION.tar.gz
